@@ -1,0 +1,49 @@
+[gd_scene load_steps=4 format=3 uid="uid://b80sg0m2cg76n"]
+
+[ext_resource type="Theme" uid="uid://bwqifwabah580" path="res://Themes/logic_block.tres" id="1_vnm4r"]
+[ext_resource type="StyleBox" uid="uid://cv24igfk83rly" path="res://LogicBlockStyles/unit.tres" id="2_bwdkt"]
+
+[sub_resource type="GDScript" id="GDScript_25uun"]
+resource_name = "unit_boost"
+script/source = "extends LogicBlocks
+
+func load_value(value: Array):
+	%a.text = value[2]
+	
+	pass
+
+func option_get_item(node: OptionButton, optext : String):
+	for i in range(node.get_popup().item_count):
+		if node.get_item_text(i) == optext:
+			node.select(i)
+
+func compile():
+	
+	return(\"ucontrol boost \" + %a.text + \" 0 0 0 0\\n\")
+
+
+"
+
+[node name="UnitBoost" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme = ExtResource("1_vnm4r")
+theme_override_styles/panel = ExtResource("2_bwdkt")
+script = SubResource("GDScript_25uun")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "Unit CtrlBoost"
+
+[node name="a" type="LineEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0"
+expand_to_text_length = true
+select_all_on_focus = true

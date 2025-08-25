@@ -1,0 +1,16 @@
+res://Scenes/editor.tscn
+res://Themes/editor.tres
+res://Themes/logic_block.tres
+res://Scripts/logic_blocks.gd
+res://Scenes/main.tscn
+res://Blocks/Logics/jump.tscn
+res://Blocks/configure.tscn
+res://Scenes/index_label.tscn
+res://Scenes/file.tscn
+res://Scenes/message_bar.tscn
+res://Scenes/message_window.tscn
+res://Scenes/set_load_edit.tscn
+res://Blocks/Controls/sensor.tscn
+res://Blocks/Units/unit_bind.tscn
+res://Scenes/unit_select_container.tscn
+res://Scripts/config.gd
