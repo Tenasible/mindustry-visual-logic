@@ -1,0 +1,21 @@
+# 核心规则：让 Git 自动处理文本文件
+* text=auto
+
+# 强制 Godot 项目文件和常见文本文件使用 LF 换行符
+*.gd text eol=lf
+*.tscn text eol=lf
+*.tres text eol=lf
+project.godot text eol=lf
+*.cfg text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+
+# 明确排除不需要转换的二进制文件类型
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.wav binary
+*.ogg binary
+*.bin binary
+*.import binary
