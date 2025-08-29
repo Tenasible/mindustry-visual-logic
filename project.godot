@@ -34,7 +34,7 @@ window/per_pixel_transparency/allowed=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-git-plugin/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 

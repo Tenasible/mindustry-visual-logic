@@ -39,6 +39,7 @@ var asynchronous_reset = false # 是否完成异步初始化
 
 var jumping = false
 
+@export var lock_jump : String
 @export var jump_to : PanelContainer
 @export var jump_index := -1
 var jump_lines
@@ -354,6 +355,22 @@ func _on_any_block_moved():
 		set_jump_dictionary( jump_index )
 		%c.text = str( jump_index )
 	pass
+
+func pre_compile(method:= 0):
+	if method == 0:
+		if jump_to:
+			
+			lock_jump = jump_to.label_value
+			
+			# 搜寻自己的目标积木
+			for i in origin_node.get_children():
+				if i.label_value == lock_jump:
+					jump_to = i
+					return false
+			
+			push_error(\"错误：Jump积木（ \", self, \" ）未能找到副本中对应的跳转目标：\", jump_to)
+		
+			
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgnm4"]

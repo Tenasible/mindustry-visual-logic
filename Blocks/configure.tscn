@@ -12,8 +12,9 @@ script/source = "extends LogicBlocks
 
 var config_node = preload(\"res://Scenes/config_setting.tscn\")
 
-func pre_compile():
-	queue_free()
+func pre_compile(method:= 0):
+	if method == 1:
+		queue_free()
 
 func compile():
 	return \"\"

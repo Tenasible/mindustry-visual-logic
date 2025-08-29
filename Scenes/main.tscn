@@ -181,12 +181,12 @@ func apply_config():
 
 
 
-func save_editor(node, path):
+func save_editor(node, path) -> bool:
 	
 	set_all_owner(node, node, 0, 64)
-	
+
 	var packed_scene = PackedScene.new()
-		
+	
 	var error = packed_scene.pack( %Editors.get_child(%Editors.current_tab) )
 	if error != OK:
 		push_error(\"编辑器打包失败：\", str(error))
@@ -226,8 +226,7 @@ func _on_file_dialog_file_selected(path: String) -> void:
 		if scene:
 			%Editors.add_child(scene)
 
-func set_all_owner(node, root, depth, max_depth):
-	
+func set_all_owner(node, root, depth, max_depth) -> bool:
 	
 	for i in node.get_children():
 		i.set_owner(root)
@@ -239,7 +238,7 @@ func set_all_owner(node, root, depth, max_depth):
 				
 			set_all_owner(i, root, depth + 1, max_depth)
 			
-	pass
+	return false
 
 
 func _on_message_pressed() -> void:
@@ -358,8 +357,10 @@ popup/item_0/text = "新建项目"
 popup/item_0/id = 0
 popup/item_1/text = "保存"
 popup/item_1/id = 1
+popup/item_1/disabled = true
 popup/item_2/text = "另存为"
 popup/item_2/id = 2
+popup/item_2/disabled = true
 popup/item_3/text = "从电脑中读取"
 popup/item_3/id = 3
 popup/item_4/id = 6

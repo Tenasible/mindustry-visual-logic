@@ -7,8 +7,9 @@
 resource_name = "jump_label"
 script/source = "extends LogicBlocks
 
-func pre_compile():
-	queue_free()
+func pre_compile(method:= 0):
+	if method == 1:
+		queue_free()
 
 func load_value(value: Array):
 	%a.text = value[0]

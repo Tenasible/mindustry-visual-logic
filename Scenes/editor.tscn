@@ -598,13 +598,12 @@ resource_name = "compile_manager"
 script/source = "extends Node
 
 var blocks_dup
+var step := 0
 
 func compile():
 	
 	blocks_dup = %UserBlocks.duplicate()
 	blocks_dup.visible = false
-	
-	
 	
 	# 复制一份积木列表到自己之下
 	self.add_child(blocks_dup)
@@ -613,36 +612,47 @@ func compile():
 	for i in blocks_dup.get_children():
 		i.origin_node = blocks_dup
 	
-	# 所有积木进行一级导出
-	for i in blocks_dup.get_children():
-		i.pre_compile()
+	step = 0
+	$CompileWait.start()
+
+## 每次计时器结束计时时，进行下一步。返回true时结束。
+func _on_timer_timeout() -> bool:
+	
+	# 第一步，jump锁定目标
+	if step == 0:
+		for i in blocks_dup.get_children():
+			i.pre_compile(0)
+		
+		step = 1
+	
+	# 第二步，删除需要忽略的积木
+	elif step == 1:
+		for i in blocks_dup.get_children():
+			i.pre_compile(1)
+		
+		step = 128
+	
+	# 最后一步，导出到剪贴板
+	elif step == 128:
+	
+		var compile_text: String
+		
+		# 所有积木进行二级导出
+		for i in blocks_dup.get_children():
+			compile_text += i.compile()
+		
+		# 删除临时积木列表
+		blocks_dup.queue_free()
+		
+		DisplayServer.clipboard_set(compile_text)
+		return true
 	
 	# 刷新
 	for i in blocks_dup.get_children():
 		i._on_any_block_moved()
-	
-	var timer = Timer.new()
-	add_child(timer)
-	timer.wait_time = 0.1
-	timer.one_shot = true
-	timer.timeout.connect(_on_next_step)
-	timer.start()
-	
-	
-	
-
-func _on_next_step():
-	
-	var compile_text: String
-	
-	# 所有积木进行二级导出
-	for i in blocks_dup.get_children():
-		compile_text += i.compile()
-	
-	# 删除临时积木列表
-	blocks_dup.queue_free()
-	
-	DisplayServer.clipboard_set(compile_text)
+		
+	$CompileWait.start()
+	return false
 "
 
 [node name="Editor" type="Control"]
@@ -954,6 +964,10 @@ text = "错误"
 unique_name_in_owner = true
 script = SubResource("GDScript_eo2o7")
 
+[node name="CompileWait" type="Timer" parent="CompileManager"]
+wait_time = 0.001
+one_shot = true
+
 [connection signal="sort_children" from="WorkArea/MainSpilt/PanelContainer/MarginContainer/UserBlockScroll/MarginContainer/UserBlocks" to="WorkArea/MainSpilt/PanelContainer/MarginContainer/UserBlockScroll/MarginContainer/UserBlocks" method="_on_block_moved"]
 [connection signal="editing_toggled" from="WorkArea/MainSpilt/PanelContainer/PanelContainer/Tools/Lefts/RenameEdit" to="." method="_on_rename_edit_editing_toggled"]
 [connection signal="text_submitted" from="WorkArea/MainSpilt/PanelContainer/PanelContainer/Tools/Lefts/RenameEdit" to="." method="_on_rename_edit_text_submitted"]
@@ -964,6 +978,7 @@ script = SubResource("GDScript_eo2o7")
 [connection signal="confirmed" from="WorkArea/MainSpilt/PanelContainer/PanelContainer/Tools/Rights/CloseButton/ConfirmClose" to="." method="_on_confirm_close_confirmed"]
 [connection signal="confirmed" from="SetLoadEdit" to="." method="_on_set_load_edit_confirmed"]
 [connection signal="confirmed" from="LoadConfirm" to="." method="_on_load_confirm_confirmed"]
+[connection signal="timeout" from="CompileManager/CompileWait" to="CompileManager" method="_on_timer_timeout"]
 
 [editable path="WorkArea/MainSpilt/PanelContainer/PanelContainer/Tools/Rights/ClearButton/ConfirmClear"]
 [editable path="WorkArea/MainSpilt/PanelContainer/PanelContainer/Tools/Rights/CloseButton/ConfirmClose"]
