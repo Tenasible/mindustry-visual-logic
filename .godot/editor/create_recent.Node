@@ -1,10 +1,11 @@
+Line2D
+PanelContainer
+VBoxContainer
+HBoxContainer
 Timer
 Label
-VBoxContainer
 HTTPRequest
 Button
-HBoxContainer
-PanelContainer
 MarginContainer
 RichTextLabel
 ScrollContainer
@@ -12,4 +13,3 @@ Window
 FileDialog
 Node
 TextureButton
-AnimationPlayer

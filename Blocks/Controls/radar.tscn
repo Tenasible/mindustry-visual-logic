@@ -60,31 +60,27 @@ theme = ExtResource("1_0gj08")
 theme_override_styles/panel = ExtResource("2_2oh3j")
 script = SubResource("GDScript_gtlx6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "Radar from"
 label_settings = SubResource("LabelSettings_nmdwr")
 
-[node name="a" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="a" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "turret1"
 expand_to_text_length = true
 select_all_on_focus = true
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "target"
 
-[node name="op1" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="op1" type="OptionButton" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/hover_pressed = ExtResource("4_4bnmr")
@@ -112,7 +108,7 @@ popup/item_6/id = 6
 popup/item_7/text = "ground"
 popup/item_7/id = 7
 
-[node name="op2" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="op2" type="OptionButton" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/hover_pressed = ExtResource("4_4bnmr")
@@ -140,7 +136,7 @@ popup/item_6/id = 6
 popup/item_7/text = "ground"
 popup/item_7/id = 7
 
-[node name="op3" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="op3" type="OptionButton" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/hover_pressed = ExtResource("4_4bnmr")
@@ -168,26 +164,22 @@ popup/item_6/id = 6
 popup/item_7/text = "ground"
 popup/item_7/id = 7
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Label3" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "order"
 
-[node name="b" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+[node name="b" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "1"
 expand_to_text_length = true
 select_all_on_focus = true
 
-[node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Label4" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "sort"
 
-[node name="op4" type="OptionButton" parent="VBoxContainer/HBoxContainer2"]
+[node name="op4" type="OptionButton" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/hover_pressed = ExtResource("4_4bnmr")
@@ -208,18 +200,18 @@ popup/item_3/id = 3
 popup/item_4/text = "maxHealth"
 popup/item_4/id = 4
 
-[node name="Label5" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Label5" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "output"
 
-[node name="c" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+[node name="c" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "result"
 expand_to_text_length = true
 select_all_on_focus = true
 
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/op1" to="." method="_on_op_1_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/op2" to="." method="_on_op_1_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/op3" to="." method="_on_op_1_item_selected"]
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer2/op4" to="." method="_on_op_1_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/op1" to="." method="_on_op_1_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/op2" to="." method="_on_op_1_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/op3" to="." method="_on_op_1_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/op4" to="." method="_on_op_1_item_selected"]

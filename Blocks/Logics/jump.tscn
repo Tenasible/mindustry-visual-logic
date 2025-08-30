@@ -9,10 +9,13 @@
 resource_name = "jump"
 script/source = "extends LogicBlocks
 
-
+func _ready():
+	spawn_index_node()
+	get_nodes()
+	
+	original_material = material
 
 func load_value(value: Array):
-	
 	
 	%c.text = value[1]
 		
@@ -42,6 +45,9 @@ var jumping = false
 @export var lock_jump : String
 @export var jump_to : PanelContainer
 @export var jump_index := -1
+
+var original_material: Material
+var line_color : Color = Color(1, 1, 1)
 var jump_lines
 
 var current_height : float = self.global_position.x
@@ -76,6 +82,12 @@ func _process(delta: float) -> void:
 	
 	logic_process()
 	
+	# 调整jump跳线颜色
+	if not is_given_block:
+		%ArrowLeft.self_modulate = line_color
+		%JumpLine.self_modulate = line_color
+		%ArrowRight.self_modulate = line_color
+		
 	if jump_to:
 		jump_index = jump_to.get_index()
 	$Node.global_position = Vector2(0 , 0)
@@ -84,7 +96,11 @@ func _process(delta: float) -> void:
 	if not asynchronous_reset:
 		if origin_node:
 			origin_node.sort_children.connect(_on_any_block_moved)
+			
+			
+				
 			asynchronous_reset = true
+			
 	
 	# jump拖拽
 	if jumping:
@@ -285,7 +301,7 @@ func _on_op_1_item_selected(index: int) -> void:
 func _on_c_text_changed(new_text: String) -> void:
 	
 	if new_text.is_valid_int():
-	
+		
 		if int(new_text) == -1:
 			jump_to = null
 		else:
@@ -341,6 +357,10 @@ func is_related(var1, var2, var3, var4) -> bool:
 
 # 向UserBlocks声明自己的jump信息。
 func set_jump_dictionary(index : int):
+	
+	# 顺带生成自己的跳线颜色。
+	line_color = generate_vibrant_color_from_seed(index, 0.9)
+	
 	if \"jump_lines\" in origin_node:
 		if self:
 			
@@ -349,6 +369,8 @@ func set_jump_dictionary(index : int):
 
 # 任何积木移动时，更新jump值
 func _on_any_block_moved():
+	
+	
 	
 	if jump_to:
 		jump_index = jump_to.get_index()
@@ -371,6 +393,21 @@ func pre_compile(method:= 0):
 			push_error(\"错误：Jump积木（ \", self, \" ）未能找到副本中对应的跳转目标：\", jump_to)
 		
 			
+## 根据给定int值生成随机颜色。
+func generate_vibrant_color_from_seed(seed_value: int, whiteness: float = 0.0) -> Color:
+	# 使用种子初始化随机数生成器
+	var rng = RandomNumberGenerator.new()
+	rng.seed = hash(seed_value)
+	
+	# 在HSV空间中生成颜色 (固定高饱和度和中等以上亮度)
+	var h = rng.randf()  # 色相 (0-1)
+	var s = lerp(0.7, 0.3, whiteness)  # 饱和度 (随着白度增加而降低)
+	var v = lerp(0.8, 1.0, whiteness)  # 亮度 (随着白度增加而增加)
+	
+	# 转换为RGB
+	var color = Color.from_hsv(h, s, v)
+	
+	return color
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kgnm4"]
@@ -472,6 +509,7 @@ visible = false
 z_index = 1
 z_as_relative = false
 width = 3.0
+texture_mode = 2
 
 [node name="ArrowRight" type="Sprite2D" parent="Node"]
 unique_name_in_owner = true

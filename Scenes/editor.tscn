@@ -30,18 +30,6 @@ func reset_nodes(dragging):
 func _ready():
 	
 	machine = get_tree().get_current_scene().machine
-	if machine == 0:
-		%ClearButton.custom_minimum_size = Vector2(30, 30)
-		%CloseButton.custom_minimum_size = Vector2(30, 30)
-	
-	if machine == 1:
-		%ClearButton.custom_minimum_size = Vector2(50, 50)
-		%CloseButton.custom_minimum_size = Vector2(50, 50)
-	
-	if machine == 2:
-		%ClearButton.custom_minimum_size = Vector2(30, 30)
-		%CloseButton.custom_minimum_size = Vector2(30, 30)
-	
 	
 	%MainSpilt.split_offset = DisplayServer.window_get_size().x * -0.5 + 200
 	user_blocks = %UserBlocks
@@ -688,7 +676,7 @@ theme_override_styles/panel = SubResource("StyleBoxEmpty_7wlcy")
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 0
-theme_override_constants/minimum_grab_thickness = 12
+theme_override_constants/minimum_grab_thickness = 25
 theme_override_constants/autohide = 0
 split_offset = -450
 dragger_visibility = 1
@@ -882,7 +870,6 @@ expand_icon = true
 unique_name_in_owner = true
 title = "清空项目"
 visible = false
-force_native = false
 window_text = "是否清空该编辑器下的所有积木？"
 
 [node name="Label" parent="WorkArea/MainSpilt/PanelContainer/PanelContainer/Tools/Rights/ClearButton/ConfirmClear/Control/MarginContainer2/VBoxContainer" index="0"]
@@ -903,7 +890,6 @@ expand_icon = true
 unique_name_in_owner = true
 title = "关闭编辑器"
 visible = false
-force_native = false
 window_text = "是否关闭当前编辑器？"
 
 [node name="Label" parent="WorkArea/MainSpilt/PanelContainer/PanelContainer/Tools/Rights/CloseButton/ConfirmClose/Control/MarginContainer2/VBoxContainer" index="0"]
@@ -926,10 +912,8 @@ offset_bottom = 59.0
 unique_name_in_owner = true
 title = "合并逻辑"
 visible = false
-force_native = false
 window_text = "请输入插入的行数，逻辑将从下一行插入。"
 ask = false
-line_edit = true
 
 [node name="Label" parent="LoadConfirm/Control/MarginContainer2/VBoxContainer" index="0"]
 text = "请输入插入的行数，逻辑将从下一行插入。"
@@ -947,7 +931,6 @@ text = "合并逻辑"
 unique_name_in_owner = true
 title = "错误"
 visible = false
-force_native = false
 window_text = "输入栏仅可输入数字。"
 ask = false
 

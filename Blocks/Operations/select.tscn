@@ -63,38 +63,34 @@ theme = ExtResource("1_r7274")
 theme_override_styles/panel = ExtResource("2_d8kw7")
 script = SubResource("GDScript_2bore")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "Select"
 label_settings = SubResource("LabelSettings_nmdwr")
 
-[node name="a" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="a" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "result"
 expand_to_text_length = true
 select_all_on_focus = true
 
-[node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer"]
+[node name="Label2" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "= if"
 
-[node name="b" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="b" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "x"
 expand_to_text_length = true
 select_all_on_focus = true
 
-[node name="op1" type="OptionButton" parent="VBoxContainer/HBoxContainer"]
+[node name="op1" type="OptionButton" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_styles/hover_pressed = ExtResource("4_rv1dg")
@@ -121,37 +117,33 @@ popup/item_6/id = 6
 popup/item_7/text = "always"
 popup/item_7/id = 7
 
-[node name="c" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+[node name="c" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "false"
 expand_to_text_length = true
 select_all_on_focus = true
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Label3" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Label3" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "then"
 
-[node name="d" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+[node name="d" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "false"
 expand_to_text_length = true
 select_all_on_focus = true
 
-[node name="Label4" type="Label" parent="VBoxContainer/HBoxContainer2"]
+[node name="Label4" type="Label" parent="HBoxContainer"]
 layout_mode = 2
 text = "else"
 
-[node name="e" type="LineEdit" parent="VBoxContainer/HBoxContainer2"]
+[node name="e" type="LineEdit" parent="HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "false"
 expand_to_text_length = true
 select_all_on_focus = true
 
-[connection signal="item_selected" from="VBoxContainer/HBoxContainer/op1" to="." method="_on_op_1_item_selected"]
+[connection signal="item_selected" from="HBoxContainer/op1" to="." method="_on_op_1_item_selected"]
